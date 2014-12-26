@@ -14,7 +14,7 @@ namespace unturned.ROCKS.MessageAnnouncer
     public class MessageAnnouncer : RocketPlugin
     {
         public int lastindex = 0;
-        public DateTime lastmessage = DateTime.Now;
+        public DateTime? lastmessage = null;
         private Configuration configuration;
 
         public void Load()
@@ -25,8 +25,6 @@ namespace unturned.ROCKS.MessageAnnouncer
                 SDG.Steam.serverDisconnected += printMessage;
 
                 configuration = (Configuration)(new Configuration()).LoadConfiguration();
-
-                lastmessage = DateTime.Now - TimeSpan.FromMinutes(configuration.Interval);
             }
             catch (Exception ex)
             {
@@ -38,7 +36,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             try
             {
-                if ((DateTime.Now - lastmessage).TotalMinutes > configuration.Interval)
+                if (((DateTime.Now - lastmessage.Value).TotalSeconds > configuration.Interval) || lastmessage == null)
                 {
                     if (lastindex > (configuration.Messages.Length - 1)) lastindex = 0;
                     string message = configuration.Messages[lastindex];

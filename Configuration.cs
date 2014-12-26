@@ -8,7 +8,7 @@ namespace unturned.ROCKS.MessageAnnouncer
 {
     public class Configuration : RocketConfiguration
     {
-        public int Interval = 3;
+        public int Interval = 180;
         public string[] Messages = { 
             "Welcome to unturned.ROCKS, we hope you enjoy your stay!",
             "Join our TeamSpeak 3 server at unturned.ROCKS!",

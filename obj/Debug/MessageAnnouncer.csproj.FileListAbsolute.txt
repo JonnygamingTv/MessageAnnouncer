@@ -1,3 +1,4 @@
 C:\Users\fr34kyn01535\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.csprojResolveAssemblyReference.cache
 C:\Users\fr34kyn01535\Documents\GitHub\bin\MessageAnnouncer.dll
 C:\Users\fr34kyn01535\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.dll
+C:\Program Files (x86)\Steam\SteamApps\common\Unturned Development\Unturned_Data\Managed\Plugins\MessageAnnouncer.dll
