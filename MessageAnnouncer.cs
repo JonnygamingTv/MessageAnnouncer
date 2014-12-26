@@ -22,10 +22,10 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             try
             {
+                configuration = (Configuration)(new Configuration()).LoadConfiguration();
+                if (!configuration.Enabled) return;
                 SDG.Steam.serverConnected += printMessage;
                 SDG.Steam.serverDisconnected += printMessage;
-
-                configuration = (Configuration)(new Configuration()).LoadConfiguration();
             }
             catch (Exception ex)
             {

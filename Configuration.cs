@@ -8,6 +8,7 @@ namespace unturned.ROCKS.MessageAnnouncer
 {
     public class Configuration : RocketConfiguration
     {
+        public bool Enabled = false;
         public int Interval = 180;
         public string[] Messages = { 
             "Welcome to unturned.ROCKS, we hope you enjoy your stay!",
