@@ -42,7 +42,7 @@ namespace unturned.ROCKS.MessageAnnouncer
                 {
                     if (lastindex > (configuration.Messages.Length - 1)) lastindex = 0;
                     string message = configuration.Messages[lastindex];
-                    ChatManager.say("#"+message);
+                    ChatManager.say(message);
                     Logger.Log(message);
                     lastmessage = DateTime.Now;
                     lastindex++;
