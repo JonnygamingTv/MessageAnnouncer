@@ -23,7 +23,6 @@ namespace unturned.ROCKS.MessageAnnouncer
             try
             {
                 configuration = RocketConfiguration.LoadConfiguration<Configuration>();
-                if (!configuration.Enabled) return;
                 SDG.Steam.serverConnected += printMessage;
                 SDG.Steam.serverDisconnected += printMessage;
             }
