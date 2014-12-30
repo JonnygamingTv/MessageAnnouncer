@@ -21,7 +21,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\Program Files %28x86%29\Steam\SteamApps\common\Unturned Development\Unturned_Data\Managed\Plugins\</OutputPath>
+    <OutputPath>..\..\..\..\..\Program Files %28x86%29\Steam\SteamApps\common\Unturned Development\Servers\testx\Rocket\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

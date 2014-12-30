@@ -23,8 +23,8 @@ namespace unturned.ROCKS.MessageAnnouncer
             try
             {
                 configuration = RocketConfiguration.LoadConfiguration<Configuration>();
-                SDG.Steam.serverConnected += printMessage;
-                SDG.Steam.serverDisconnected += printMessage;
+                RocketAPI.Events.PlayerConnected += printMessage;
+                RocketAPI.Events.PlayerDisconnected += printMessage;
             }
             catch (Exception ex)
             {
