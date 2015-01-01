@@ -6,7 +6,7 @@ using System.Text;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
-    public class Configuration : RocketConfiguration
+    public class Configuration
     {
         public int Interval = 180;
         public string[] Messages = { 

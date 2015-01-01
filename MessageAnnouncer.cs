@@ -9,6 +9,8 @@ using System.IO;
 using System.Reflection;
 using Rocket.RocketAPI;
 using System.ComponentModel;
+using Rocket.RocketAPI.Interfaces;
+using Rocket.RocketAPI.Managers;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
@@ -22,7 +24,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             try
             {
-                configuration = RocketConfiguration.LoadConfiguration<Configuration>();
+                configuration = ConfigurationManager.LoadConfiguration<Configuration>();
                 RocketAPI.Events.PlayerConnected += printMessage;
                 RocketAPI.Events.PlayerDisconnected += printMessage;
             }
