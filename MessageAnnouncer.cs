@@ -18,7 +18,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         public DateTime? lastmessage = null;
         private MessageAnnouncerConfiguration configuration;
 
-        public void Load()
+        protected override void Load()
         {
             try
             {
@@ -55,25 +55,10 @@ namespace unturned.ROCKS.MessageAnnouncer
                     lastindex++;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Logger.Log(e.ToString());
+                Logger.LogException(ex);
             }
-        }
-
-        public string Author
-        {
-            get { return "fr34kyn01535"; }
-        }
-
-        public string Name
-        {
-            get { return Assembly.GetExecutingAssembly().GetName().Name.ToString(); }
-        }
-
-        public string Version
-        {
-            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
     }
 }
