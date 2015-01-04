@@ -7,32 +7,38 @@ using SDG;
 using System.Timers;
 using System.IO;
 using System.Reflection;
-using Rocket.RocketAPI;
 using System.ComponentModel;
-using Rocket.RocketAPI.Interfaces;
-using Rocket.RocketAPI.Managers;
+using Rocket;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
-    public class MessageAnnouncer : RocketPlugin
+    public class MessageAnnouncer : RocketComponent
     {
         public int lastindex = 0;
         public DateTime? lastmessage = null;
-        private Configuration configuration;
+        private MessageAnnouncerConfiguration configuration;
 
         public void Load()
         {
             try
             {
-                configuration = ConfigurationManager.LoadConfiguration<Configuration>();
-                RocketAPI.Events.PlayerConnected += printMessage;
-                RocketAPI.Events.PlayerDisconnected += printMessage;
+                configuration = Configuration.LoadConfiguration<MessageAnnouncerConfiguration>();
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
 
+        }
+
+        protected override void onPlayerConnected(CSteamID cSteamID)
+        {
+            printMessage(cSteamID);
+        }
+
+        protected override void onPlayerDisconnected(CSteamID cSteamID)
+        {
+            printMessage(cSteamID);
         }
 
         private void printMessage(CSteamID id)

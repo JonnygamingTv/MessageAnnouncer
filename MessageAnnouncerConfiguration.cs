@@ -1,12 +1,7 @@
-﻿using Rocket.RocketAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace unturned.ROCKS.MessageAnnouncer
 {
-    public class Configuration
+    public class MessageAnnouncerConfiguration
     {
         public int Interval = 180;
         public string[] Messages = { 
