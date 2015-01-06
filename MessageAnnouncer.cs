@@ -9,46 +9,35 @@ using System.IO;
 using System.Reflection;
 using System.ComponentModel;
 using Rocket;
+using Rocket.RocketAPI;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
-    public class MessageAnnouncer : RocketComponent
+    public class MessageAnnouncer : RocketPlugin<MessageAnnouncerConfiguration>
     {
         public int lastindex = 0;
         public DateTime? lastmessage = null;
-        private MessageAnnouncerConfiguration configuration;
 
         protected override void Load()
         {
-            try
-            {
-                configuration = Configuration.LoadConfiguration<MessageAnnouncerConfiguration>();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-
+            Events.OnPlayerConnected += Events_OnPlayerPrint;
+            Events.OnPlayerDisconnected += Events_OnPlayerPrint;
         }
 
-        protected override void onPlayerConnected(CSteamID cSteamID)
+        void Events_OnPlayerPrint(Player player)
         {
-            printMessage(cSteamID);
+            printMessage(player.SteamChannel.SteamPlayer.SteamPlayerID.CSteamID);
         }
 
-        protected override void onPlayerDisconnected(CSteamID cSteamID)
-        {
-            printMessage(cSteamID);
-        }
 
         private void printMessage(CSteamID id)
         {
             try
             {
-                if (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > configuration.Interval))
+                if (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval))
                 {
-                    if (lastindex > (configuration.Messages.Length - 1)) lastindex = 0;
-                    string message = configuration.Messages[lastindex];
+                    if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
+                    string message = Configuration.Messages[lastindex];
                     ChatManager.say(message);
                     Logger.Log(message);
                     lastmessage = DateTime.Now;
