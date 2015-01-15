@@ -18,23 +18,17 @@ namespace unturned.ROCKS.MessageAnnouncer
         public int lastindex = 0;
         public DateTime? lastmessage = null;
 
-        protected override void Load()
+        void Update()
         {
-            Events.OnPlayerConnected += Events_OnPlayerPrint;
-            Events.OnPlayerDisconnected += Events_OnPlayerPrint;
-        }
-
-        void Events_OnPlayerPrint(Player player)
-        {
-            printMessage(player.SteamChannel.SteamPlayer.SteamPlayerID.CSteamID);
+            printMessage();
         }
 
 
-        private void printMessage(CSteamID id)
+        private void printMessage()
         {
             try
             {
-                if (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval))
+                if (Loaded && lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval))
                 {
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
                     string message = Configuration.Messages[lastindex];
