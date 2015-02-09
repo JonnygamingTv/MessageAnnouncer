@@ -19,7 +19,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         public int lastindex = 0;
         public DateTime? lastmessage = null;
 
-        void Update()
+        void FixedUpdate()
         {
             printMessage();
         }
@@ -33,7 +33,7 @@ namespace unturned.ROCKS.MessageAnnouncer
                 {
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
                     string message = Configuration.Messages[lastindex];
-                    ChatManager.say(message);
+                    RocketChatManager.Say(message);
                     Logger.Log(message);
                     lastmessage = DateTime.Now;
                     lastindex++;
