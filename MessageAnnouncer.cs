@@ -24,6 +24,22 @@ namespace unturned.ROCKS.MessageAnnouncer
             printMessage();
         }
 
+        protected override void Load()
+        {
+            List<Command> commands = Commander.Commands.ToList();
+            foreach (TextCommand t in Configuration.TextCommands)
+            {
+                commands.Add(new RocketTextCommand(t.Name, t.Help, t.Text));
+            }
+            Commander.Commands = commands.ToArray();
+        }
+
+        protected override void Unload()
+        {
+            Command[] commands = Commander.Commands;
+            commands = commands.Where(c => c.GetType().Assembly.GetName() != Assembly.GetExecutingAssembly().GetName()).ToArray();
+            Commander.Commands = commands;
+        }
 
         private void printMessage()
         {
