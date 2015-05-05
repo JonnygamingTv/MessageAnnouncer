@@ -11,7 +11,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         [XmlArrayItem("Line")]
         public List<string> Text;
     }
-    public class MessageAnnouncerConfiguration : RocketConfiguration
+    public class MessageAnnouncerConfiguration : IRocketConfiguration
     {
         public int Interval;
         public string[] Messages;
@@ -20,7 +20,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         [XmlArray(ElementName = "TextCommands")]
         public List<TextCommand> TextCommands;
 
-        public RocketConfiguration DefaultConfiguration
+        public IRocketConfiguration DefaultConfiguration
         {
             get {
                 MessageAnnouncerConfiguration config = new MessageAnnouncerConfiguration();
