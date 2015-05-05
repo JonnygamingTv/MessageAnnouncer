@@ -45,7 +45,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             try
             {
-                if (Loaded && lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval))
+                if (Loaded && Configuration.Messages != null && (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval)))
                 {
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
                     string message = Configuration.Messages[lastindex];
