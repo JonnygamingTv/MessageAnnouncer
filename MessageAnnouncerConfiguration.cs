@@ -1,7 +1,7 @@
-﻿
-using Rocket.RocketAPI;
+﻿using Rocket.API;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+
 namespace unturned.ROCKS.MessageAnnouncer
 {
     public sealed class TextCommand
@@ -11,7 +11,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         [XmlArrayItem("Line")]
         public List<string> Text;
     }
-    public class MessageAnnouncerConfiguration : IRocketConfiguration
+    public class MessageAnnouncerConfiguration : IRocketPluginConfiguration
     {
         public int Interval;
         public string[] Messages;
@@ -20,7 +20,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         [XmlArray(ElementName = "TextCommands")]
         public List<TextCommand> TextCommands;
 
-        public IRocketConfiguration DefaultConfiguration
+        public IRocketPluginConfiguration DefaultConfiguration
         {
             get {
                 MessageAnnouncerConfiguration config = new MessageAnnouncerConfiguration();

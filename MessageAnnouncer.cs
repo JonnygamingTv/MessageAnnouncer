@@ -9,8 +9,9 @@ using System.IO;
 using System.Reflection;
 using System.ComponentModel;
 using Rocket;
-using Rocket.RocketAPI;
-using Rocket.Logging;
+using Rocket.Unturned.Plugins;
+using Rocket.Unturned.Logging;
+using Rocket.Unturned;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
@@ -49,7 +50,7 @@ namespace unturned.ROCKS.MessageAnnouncer
                 {
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
                     string message = Configuration.Messages[lastindex];
-                    RocketChatManager.Say(message);
+                    RocketChat.Say(message);
                     Logger.Log(message);
                     lastmessage = DateTime.Now;
                     lastindex++;

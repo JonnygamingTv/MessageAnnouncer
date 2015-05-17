@@ -1,4 +1,4 @@
-﻿using Rocket.RocketAPI;
+﻿using Rocket.Unturned;
 using SDG;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         protected override void execute(Steamworks.CSteamID caller, string command)
         {
             foreach (string l in text) {
-                RocketChatManager.Say(caller, l);
+                RocketChat.Say(caller, l);
             }
         }
     }
