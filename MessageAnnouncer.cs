@@ -27,9 +27,12 @@ namespace unturned.ROCKS.MessageAnnouncer
 
         protected override void Load()
         {
-            foreach (TextCommand t in Configuration.TextCommands)
+            if (Configuration != null && Configuration.TextCommands != null)
             {
-                Commander.Commands.Add(new RocketTextCommand(t.Name, t.Help, t.Text));
+                foreach (TextCommand t in Configuration.TextCommands)
+                {
+                    Commander.Commands.Add(new RocketTextCommand(t.Name, t.Help, t.Text));
+                }
             }
         }
 
