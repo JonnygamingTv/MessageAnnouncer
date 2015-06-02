@@ -12,6 +12,7 @@ using Rocket;
 using Rocket.Unturned.Plugins;
 using Rocket.Unturned.Logging;
 using Rocket.Unturned;
+using UnityEngine;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
@@ -48,9 +49,9 @@ namespace unturned.ROCKS.MessageAnnouncer
                 if (Loaded && Configuration.Messages != null && (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval)))
                 {
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
-                    string message = Configuration.Messages[lastindex];
-                    RocketChat.Say(message);
-                    Logger.Log(message);
+                    Message message = Configuration.Messages[lastindex];
+                    RocketChat.Say(message.Text,RocketChat.GetColorFromName(message.Color,Color.green));
+                    Logger.Log(message.Text);
                     lastmessage = DateTime.Now;
                     lastindex++;
                 }

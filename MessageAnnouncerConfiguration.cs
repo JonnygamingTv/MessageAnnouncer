@@ -11,10 +11,34 @@ namespace unturned.ROCKS.MessageAnnouncer
         [XmlArrayItem("Line")]
         public List<string> Text;
     }
+
+    public sealed class Message
+    {
+        [XmlAttribute("Text")]
+        public string Text;
+
+        [XmlAttribute("Color")]
+        public string Color;
+
+        public Message(string text, string color)
+        {
+            Text = text;
+            Color = color;
+        }
+        public Message()
+        {
+            Text = "";
+            Color = "";
+        }
+    }
+
     public class MessageAnnouncerConfiguration : IRocketPluginConfiguration
     {
         public int Interval;
-        public string[] Messages;
+
+        [XmlArrayItem("Message")]
+        [XmlArray(ElementName = "Messages")]
+        public Message[] Messages;
 
         [XmlArrayItem("TextCommand")]
         [XmlArray(ElementName = "TextCommands")]
@@ -24,15 +48,15 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             get {
                 MessageAnnouncerConfiguration config = new MessageAnnouncerConfiguration();
-                config.Messages = new string[]{ 
-                    "Welcome to unturned.ROCKS, we hope you enjoy your stay!",
-                    "Join our TeamSpeak 3 server at unturned.ROCKS!",
-                    "Please chat in english. Be polite.",
-                    "We are searchin staff, Apply on our forum!",
-                    "Check out our forum at https://unturned.ROCKS",
-                    "If you have any questions ask an admin on our TeamSpeak 3 server!",
-                    "Please chat in english. Be polite.",
-                    "We are searchin staff, Apply on our forum!",
+                config.Messages = new Message[]{ 
+                    new Message("Welcome to unturned.ROCKS, we hope you enjoy your stay!","Green"),
+                    new Message("Join our TeamSpeak 3 server at unturned.ROCKS!","Green"),
+                    new Message("Please chat in english. Be polite.","Green"),
+                    new Message("We are searchin staff, Apply on our forum!","Green"),
+                    new Message("Check out our forum at https://unturned.ROCKS","Green"),
+                    new Message("If you have any questions ask an admin on our TeamSpeak 3 server!","Green"),
+                    new Message("Please chat in english. Be polite.","Green"),
+                    new Message("We are searchin staff, Apply on our forum!","Green")
                 };
                 config.TextCommands = new List<TextCommand>(){
                     new TextCommand(){Name="rules",Help="Shows the server rules",Text = new List<string>(){
