@@ -13,6 +13,7 @@ using Rocket.Unturned.Plugins;
 using Rocket.Unturned.Logging;
 using Rocket.Unturned;
 using UnityEngine;
+using SDG.Unturned;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
