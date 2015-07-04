@@ -52,7 +52,7 @@ namespace unturned.ROCKS.MessageAnnouncer
                     if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
                     Message message = Configuration.Messages[lastindex];
                     RocketChat.Say(message.Text,RocketChat.GetColorFromName(message.Color,Color.green));
-                    Logger.Log(message.Text);
+                    //Logger.Log(message.Text);
                     lastmessage = DateTime.Now;
                     lastindex++;
                 }
