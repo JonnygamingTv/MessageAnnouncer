@@ -54,6 +54,11 @@
       <HintPath>lib\Rocket.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Rocket.Core, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Rocket.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Rocket.Unturned, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Rocket.Unturned.dll</HintPath>

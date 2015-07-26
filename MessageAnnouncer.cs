@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Steamworks;
-using SDG;
-using System.Timers;
-using System.IO;
 using System.Reflection;
-using System.ComponentModel;
-using Rocket;
-using Rocket.Unturned.Plugins;
-using Rocket.Unturned.Logging;
 using Rocket.Unturned;
 using UnityEngine;
 using SDG.Unturned;
+using Rocket.Core.Plugins;
+using Rocket.Core.Logging;
+using Rocket.Unturned.Chat;
 
 namespace unturned.ROCKS.MessageAnnouncer
 {
@@ -29,9 +22,10 @@ namespace unturned.ROCKS.MessageAnnouncer
 
         protected override void Load()
         {
-            if (Configuration != null && Configuration.TextCommands != null)
+            Logger.Log("Load");
+            if (Configuration != null && Configuration.Instance.TextCommands != null)
             {
-                foreach (TextCommand t in Configuration.TextCommands)
+                foreach (TextCommand t in Configuration.Instance.TextCommands)
                 {
                     Commander.Commands.Add(new RocketTextCommand(t.Name, t.Help, t.Text));
                 }
@@ -40,6 +34,7 @@ namespace unturned.ROCKS.MessageAnnouncer
 
         protected override void Unload()
         {
+            Logger.Log("Unload");
             Commander.Commands = Commander.Commands.Where(c => c.GetType().Assembly.GetName() != Assembly.GetExecutingAssembly().GetName()).ToList();
         }
 
@@ -47,12 +42,12 @@ namespace unturned.ROCKS.MessageAnnouncer
         {
             try
             {
-                if (Loaded && Configuration.Messages != null && (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Interval)))
+                if (State == Rocket.API.PluginState.Loaded && Configuration.Instance.Messages != null && (lastmessage == null || ((DateTime.Now - lastmessage.Value).TotalSeconds > Configuration.Instance.Interval)))
                 {
-                    if (lastindex > (Configuration.Messages.Length - 1)) lastindex = 0;
-                    Message message = Configuration.Messages[lastindex];
-                    RocketChat.Say(message.Text,RocketChat.GetColorFromName(message.Color,Color.green));
-                    //Logger.Log(message.Text);
+                    if (lastindex > (Configuration.Instance.Messages.Length - 1)) lastindex = 0;
+                    Message message = Configuration.Instance.Messages[lastindex];
+                    UnturnedChat.Say(message.Text, UnturnedChat.GetColorFromName(message.Color,Color.green));
+                    Logger.Log(message.Text);
                     lastmessage = DateTime.Now;
                     lastindex++;
                 }

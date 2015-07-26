@@ -1,4 +1,5 @@
 ﻿using Rocket.Unturned;
+using Rocket.Unturned.Chat;
 using SDG;
 using SDG.Unturned;
 using System;
@@ -23,7 +24,7 @@ namespace unturned.ROCKS.MessageAnnouncer
         protected override void execute(Steamworks.CSteamID caller, string command)
         {
             foreach (string l in text) {
-                RocketChat.Say(caller, l);
+                UnturnedChat.Say(caller, l);
             }
         }
     }
