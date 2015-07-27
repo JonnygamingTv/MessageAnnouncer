@@ -34,40 +34,31 @@ namespace unturned.ROCKS.MessageAnnouncer
 
     public class MessageAnnouncerConfiguration : IRocketPluginConfiguration
     {
-        public int Interval;
+        public int Interval = 180;
 
         [XmlArrayItem("Message")]
         [XmlArray(ElementName = "Messages")]
-        public Message[] Messages;
+        public Message[] Messages = new Message[]{
+            new Message("Welcome to unturned.ROCKS, we hope you enjoy your stay!","Green"),
+            new Message("Join our TeamSpeak 3 server at unturned.ROCKS!","Green"),
+            new Message("Please chat in english. Be polite.","Green"),
+            new Message("We are searchin staff, Apply on our forum!","Green"),
+            new Message("Check out our forum at https://unturned.ROCKS","Green"),
+            new Message("If you have any questions ask an admin on our TeamSpeak 3 server!","Green"),
+            new Message("Please chat in english. Be polite.","Green"),
+            new Message("We are searchin staff, Apply on our forum!","Green")
+        };
 
         [XmlArrayItem("TextCommand")]
         [XmlArray(ElementName = "TextCommands")]
-        public List<TextCommand> TextCommands;
-
-        public IRocketPluginConfiguration DefaultConfiguration
-        {
-            get {
-                MessageAnnouncerConfiguration config = new MessageAnnouncerConfiguration();
-                config.Messages = new Message[]{ 
-                    new Message("Welcome to unturned.ROCKS, we hope you enjoy your stay!","Green"),
-                    new Message("Join our TeamSpeak 3 server at unturned.ROCKS!","Green"),
-                    new Message("Please chat in english. Be polite.","Green"),
-                    new Message("We are searchin staff, Apply on our forum!","Green"),
-                    new Message("Check out our forum at https://unturned.ROCKS","Green"),
-                    new Message("If you have any questions ask an admin on our TeamSpeak 3 server!","Green"),
-                    new Message("Please chat in english. Be polite.","Green"),
-                    new Message("We are searchin staff, Apply on our forum!","Green")
-                };
-                config.TextCommands = new List<TextCommand>(){
-                    new TextCommand(){Name="rules",Help="Shows the server rules",Text = new List<string>(){
-        "#1 No offensive content in the chat, respect other players",
-        "#2 No bug using, exploiting or abuse of powers",
-        "#3 Don't ask admins for items, teleports, loot respawn, ect.",
-        "#4 Please speak english in the public chat"}}
-                };
-                config.Interval =  180;
-                return config;
+        public List<TextCommand> TextCommands = new List<TextCommand>(){
+            new TextCommand(){Name="rules",Help="Shows the server rules",Text = new List<string>(){
+                "#1 No offensive content in the chat, respect other players",
+                "#2 No bug using, exploiting or abuse of powers",
+                "#3 Don't ask admins for items, teleports, loot respawn, ect.",
+                "#4 Please speak english in the public chat"}
             }
-        }
+        };
+        
     }
 }
