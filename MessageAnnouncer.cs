@@ -7,7 +7,7 @@ using Rocket.Core.Plugins;
 using Rocket.Core.Logging;
 using Rocket.Unturned.Chat;
 
-namespace unturned.ROCKS.MessageAnnouncer
+namespace fr34kyn01535.MessageAnnouncer
 {
     public class MessageAnnouncer : RocketPlugin<MessageAnnouncerConfiguration>
     {

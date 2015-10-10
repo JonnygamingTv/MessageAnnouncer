@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System;
 
-namespace unturned.ROCKS.MessageAnnouncer
+namespace fr34kyn01535.MessageAnnouncer
 {
     public sealed class TextCommand
     {
