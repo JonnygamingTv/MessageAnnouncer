@@ -7,3 +7,6 @@ C:\Users\fr34kyn01535\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnounc
 E:\Dokumente\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.csprojResolveAssemblyReference.cache
 E:\Dokumente\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.dll
 E:\Desktop\Unturned\Servers\test\Rocket\Plugins\MessageAnnouncer.dll
+C:\Users\Administrator\Desktop\Unturned\Servers\test\Rocket\Plugins\MessageAnnouncer.dll
+C:\Users\Administrator\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.dll
