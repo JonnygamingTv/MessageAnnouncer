@@ -29,11 +29,6 @@ namespace fr34kyn01535.MessageAnnouncer
             get { return new List<string>(); }
         }
 
-        public bool AllowFromConsole
-        {
-            get { return true; }
-        }
-
         public void Execute(IRocketPlayer caller, string[] command)
         {
             foreach (string l in text)
@@ -60,6 +55,12 @@ namespace fr34kyn01535.MessageAnnouncer
         public string Syntax
         {
             get { return ""; }
+        }
+
+
+        public AllowedCaller AllowedCaller
+        {
+            get { return Rocket.API.AllowedCaller.Both; }
         }
     }
 }
