@@ -1,4 +1,5 @@
-﻿using Rocket.Unturned;
+﻿using Rocket.API;
+using Rocket.Unturned;
 using Rocket.Unturned.Chat;
 using SDG;
 using SDG.Unturned;
@@ -9,23 +10,56 @@ using System.Text;
 
 namespace fr34kyn01535.MessageAnnouncer
 {
-    public class RocketTextCommand : Command
+    public class RocketTextCommand : IRocketCommand
     {
         private List<string> text;
+        private string name;
+        private string help;
+        
 
         public RocketTextCommand(string commandName,string commandHelp,List<string> text)
         {
-            base.commandName = commandName;
-            base.commandHelp = commandHelp;
-            base.commandInfo = base.commandName + " - " + base.commandHelp;
+            name = commandName;
+            help = commandHelp;
             this.text = text;
         }
 
-        protected override void execute(Steamworks.CSteamID caller, string command)
+        public List<string> Aliases
         {
-            foreach (string l in text) {
+            get { return new List<string>(); }
+        }
+
+        public bool AllowFromConsole
+        {
+            get { return true; }
+        }
+
+        public void Execute(IRocketPlayer caller, string[] command)
+        {
+            foreach (string l in text)
+            {
                 UnturnedChat.Say(caller, l);
             }
+        }
+
+        public string Help
+        {
+            get { return help; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public List<string> Permissions
+        {
+            get { return new List<string>(); }
+        }
+
+        public string Syntax
+        {
+            get { return ""; }
         }
     }
 }

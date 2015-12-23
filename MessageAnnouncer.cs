@@ -6,6 +6,8 @@ using SDG.Unturned;
 using Rocket.Core.Plugins;
 using Rocket.Core.Logging;
 using Rocket.Unturned.Chat;
+using Rocket.Core;
+using System.Collections.Generic;
 
 namespace fr34kyn01535.MessageAnnouncer
 {
@@ -19,6 +21,8 @@ namespace fr34kyn01535.MessageAnnouncer
             printMessage();
         }
 
+        private List<RocketTextCommand> commands = new List<RocketTextCommand>();
+
         protected override void Load()
         {
             Logger.Log("Load");
@@ -26,7 +30,9 @@ namespace fr34kyn01535.MessageAnnouncer
             {
                 foreach (TextCommand t in Configuration.Instance.TextCommands)
                 {
-                    Commander.Commands.Add(new RocketTextCommand(t.Name, t.Help, t.Text));
+                    RocketTextCommand command = new RocketTextCommand(t.Name, t.Help, t.Text);
+                    commands.Add(command);
+                    R.Commands.Register(command);
                 }
             }
         }
@@ -34,7 +40,11 @@ namespace fr34kyn01535.MessageAnnouncer
         protected override void Unload()
         {
             Logger.Log("Unload");
-            Commander.Commands = Commander.Commands.Where(c => c.GetType().Assembly.GetName() != Assembly.GetExecutingAssembly().GetName()).ToList();
+            foreach (RocketTextCommand command in commands)
+            {
+                R.Commands.Deregister(command);
+            }
+            commands.Clear();
         }
 
         private void printMessage()
