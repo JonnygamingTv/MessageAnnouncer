@@ -42,7 +42,7 @@ namespace fr34kyn01535.MessageAnnouncer
             Logger.Log("Unload");
             foreach (RocketTextCommand command in commands)
             {
-                R.Commands.Deregister(command);
+                R.Commands.DeregisterFromAssembly(this.Assembly);
             }
             commands.Clear();
         }
