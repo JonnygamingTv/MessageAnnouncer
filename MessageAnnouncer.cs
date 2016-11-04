@@ -25,7 +25,7 @@ namespace fr34kyn01535.MessageAnnouncer
 
         protected override void Load()
         {
-            Logger.Log("Load");
+            Rocket.Core.Logging.Logger.Log("Load");
             if (Configuration != null && Configuration.Instance.TextCommands != null)
             {
                 foreach (TextCommand t in Configuration.Instance.TextCommands)
@@ -39,7 +39,7 @@ namespace fr34kyn01535.MessageAnnouncer
 
         protected override void Unload()
         {
-            Logger.Log("Unload");
+            Rocket.Core.Logging.Logger.Log("Unload");
             foreach (RocketTextCommand command in commands)
             {
                 R.Commands.DeregisterFromAssembly(this.Assembly);
@@ -56,14 +56,14 @@ namespace fr34kyn01535.MessageAnnouncer
                     if (lastindex > (Configuration.Instance.Messages.Length - 1)) lastindex = 0;
                     Message message = Configuration.Instance.Messages[lastindex];
                     UnturnedChat.Say(message.Text, UnturnedChat.GetColorFromName(message.Color,Color.green));
-                    Logger.Log(message.Text);
+                    Rocket.Core.Logging.Logger.Log(message.Text);
                     lastmessage = DateTime.Now;
                     lastindex++;
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                Rocket.Core.Logging.Logger.LogException(ex);
             }
         }
     }

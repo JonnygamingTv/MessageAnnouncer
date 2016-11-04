@@ -14,3 +14,5 @@ D:\Files from Old Windows Installs\laptop files\Desktop\Unturned\Servers\test\Ro
 D:\Files from Old Windows Installs\laptop files\documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.csprojResolveAssemblyReference.cache
 D:\Files from Old Windows Installs\laptop files\documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.dll
 D:\Files from Old Windows Installs\laptop files\documents\GitHub\MessageAnnouncer\bin\Debug\MessageAnnouncer.dll
+C:\Users\sven-\Documents\GitHub\MessageAnnouncer\bin\Debug\MessageAnnouncer.dll
+C:\Users\sven-\Documents\GitHub\MessageAnnouncer\obj\Debug\MessageAnnouncer.dll
