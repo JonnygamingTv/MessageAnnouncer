@@ -7,6 +7,7 @@ using Rocket.API.Commands;
 using Rocket.API.DependencyInjection;
 using Rocket.API.Scheduler;
 using Rocket.API.User;
+using Rocket.Core.Scheduler;
 
 namespace fr34kyn01535.MessageAnnouncer
 {
@@ -27,19 +28,13 @@ namespace fr34kyn01535.MessageAnnouncer
         {
             base.OnLoad(isFromReload);
 
-            _task = _scheduler.ScheduleEveryAsyncFrame(this, PrintMessage);
+            _task = _scheduler.ScheduleEveryAsyncFrame(this, PrintMessage, "Message announcer");
 
             if (!isFromReload)
                 return;
 
             var provider = (TextCommandProvider)Container.Resolve<ICommandProvider>("text_commands");
             provider.Rebuild();
-        }
-
-        protected override void OnUnload()
-        {
-            base.OnUnload();
-            _task.Cancel();
         }
 
         private void PrintMessage()
