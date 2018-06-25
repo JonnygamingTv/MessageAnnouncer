@@ -7,6 +7,7 @@ using Rocket.API.DependencyInjection;
 using Rocket.API.Drawing;
 using Rocket.API.Scheduler;
 using Rocket.API.User;
+using Rocket.Core.Logging;
 using Rocket.Core.Scheduler;
 
 namespace fr34kyn01535.MessageAnnouncer
@@ -21,14 +22,13 @@ namespace fr34kyn01535.MessageAnnouncer
         }
 
         private int _lastindex;
-        private DateTime? _lastMessageTime;
-        private ITask _task;
 
         protected override void OnLoad(bool isFromReload)
         {
             base.OnLoad(isFromReload);
+            Logger.LogInformation("Loaded.");
 
-            _task = _scheduler.ScheduleEveryAsyncFrame(this, PrintMessage, "Message announcer");
+            _scheduler.SchedulePeriodically(this, PrintMessage, "Message announcer", new TimeSpan(0, 0, 0, ConfigurationInstance.Interval));
 
             if (!isFromReload)
                 return;
@@ -39,17 +39,12 @@ namespace fr34kyn01535.MessageAnnouncer
 
         private void PrintMessage()
         {
-            if (_lastMessageTime != null &&
-                (DateTime.Now - _lastMessageTime.Value).TotalSeconds < ConfigurationInstance.Interval)
-                return;
-
             var userManager = Container.Resolve<IUserManager>();
             if (_lastindex > (ConfigurationInstance.Messages.Length - 1))
                 _lastindex = 0;
 
             Message message = ConfigurationInstance.Messages[_lastindex];
             userManager.Broadcast(null, message.Text, GetColorFromName(message.Color, Color.Green));
-            _lastMessageTime = DateTime.Now;
             _lastindex++;
         }
 
