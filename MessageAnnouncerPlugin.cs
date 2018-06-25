@@ -1,10 +1,10 @@
 ﻿using System;
 using Rocket.Core.Plugins;
-using System.Drawing;
 using System.Globalization;
 using fr34kyn01535.MessageAnnouncer.Config;
 using Rocket.API.Commands;
 using Rocket.API.DependencyInjection;
+using Rocket.API.Drawing;
 using Rocket.API.Scheduler;
 using Rocket.API.User;
 using Rocket.Core.Scheduler;
