@@ -7,7 +7,7 @@ namespace fr34kyn01535.MessageAnnouncer.Config
         public string Name { get; set; }
         public string Help { get; set; }
 
-        [ConfigArray]
+        [ConfigArray(ElementName = "Line")]
         public string[] Lines { get; set; }
 
         public string Permission { get; set; }

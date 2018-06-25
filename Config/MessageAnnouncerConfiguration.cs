@@ -6,7 +6,7 @@ namespace fr34kyn01535.MessageAnnouncer.Config
     {
         public int Interval { get; set; } = 100;
 
-        [ConfigArray]
+        [ConfigArray(ElementName = "Message")]
         public Message[] Messages { get; set; } =
         {
             new Message("Welcome to our server, we hope you enjoy your stay!","Green"),
@@ -18,7 +18,7 @@ namespace fr34kyn01535.MessageAnnouncer.Config
             new Message("Please chat in english. Be polite.","Green")
         };
 
-        [ConfigArray]
+        [ConfigArray(ElementName = "TextCommand")]
         public TextCommand[] TextCommands { get; set; } =
         {
             new TextCommand
