@@ -1,43 +1,37 @@
-﻿using System;
+﻿using Rocket.API;
+using Rocket.Unturned.Chat;
+using System;
 using System.Collections.Generic;
-using Rocket.API.Commands;
-using Rocket.Core.DependencyInjection;
-using Rocket.Core.User;
 
 namespace fr34kyn01535.MessageAnnouncer
 {
-    [DontAutoRegister]
-    public class RocketTextCommand : ICommand
+    public class RocketTextCommand : IRocketCommand
     {
         public string Name { get; }
-        public string[] Aliases => null;
+        public List<string> Aliases => null;
         public string Syntax => "";
-        public IChildCommand[] ChildCommands => null;
-        public string Summary { get; }
+        public string Help { get; }
         public string Description => null;
-        public string Permission { get; }
+        public List<string> Permissions { get; }
 
-        private readonly List<string> _textLines;
+        public AllowedCaller AllowedCaller => AllowedCaller.Both;
 
-        public RocketTextCommand(string name, string summary, string permission, List<string> textLines)
+        private readonly string[] _textLines;
+
+        public RocketTextCommand(string name, string summary, string permission, string[] textLines)
         {
             Name = name;
-            Summary = summary;
-            Permission = permission;
+            Help = summary;
+            Permissions = new List<string> { permission };
 
             _textLines = textLines;
         }
 
-        public bool SupportsUser(Type user)
-        {
-            return true;
-        }
-
-        public void Execute(ICommandContext context)
+        public void Execute(IRocketPlayer caller, string[] command)
         {
             foreach (string l in _textLines)
             {
-                context.User.SendMessage(l);
+                UnturnedChat.Say(caller,l);
             }
         }
     }

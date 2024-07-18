@@ -1,64 +1,71 @@
 ﻿using System;
-using Rocket.Core.Plugins;
 using System.Globalization;
 using fr34kyn01535.MessageAnnouncer.Config;
-using Rocket.API.Commands;
-using Rocket.API.DependencyInjection;
-using Rocket.API.Drawing;
-using Rocket.API.Scheduler;
-using Rocket.API.User;
 using Rocket.Core.Logging;
-using Rocket.Core.Scheduler;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Rocket.Unturned.Chat;
+using UnityEngine;
+using System.Collections;
+using Rocket.Core;
 
 namespace fr34kyn01535.MessageAnnouncer
 {
-    public class MessageAnnouncerPlugin : Plugin<MessageAnnouncerConfiguration>
+    public class MessageAnnouncerPlugin : Rocket.Core.Plugins.RocketPlugin<MessageAnnouncerConfiguration>
     {
-        private readonly ITaskScheduler _scheduler;
-
-        public MessageAnnouncerPlugin(IDependencyContainer container, ITaskScheduler scheduler) : base("MessageAnnouncer", container)
-        {
-            _scheduler = scheduler;
-        }
-
+        private readonly IEnumerator _scheduler;
         private int _lastindex;
 
-        protected override void OnLoad(bool isFromReload)
+        protected override void Load()
         {
-            base.OnLoad(isFromReload);
-            Logger.LogInformation("Loaded.");
+            Rocket.Core.Logging.Logger.Log("Loading.");
 
-            _scheduler.SchedulePeriodically(this, PrintMessage, "Message announcer", new TimeSpan(0, 0, 0, ConfigurationInstance.Interval));
+            StartCoroutine(nameof(PrintMessage));
 
-            if (!isFromReload)
-                return;
+            if (Configuration.Instance.TextCommands != null)
+            {
+                for (int i = 0; i < Configuration.Instance.TextCommands.Length; i++)
+                {
+                    RocketTextCommand cmd = new RocketTextCommand(Configuration.Instance.TextCommands[i].Name, Configuration.Instance.TextCommands[i].Help, Configuration.Instance.TextCommands[i].Permission, Configuration.Instance.TextCommands[i].Lines);
+                    R.Commands.Register(cmd);
+                }
+            }
 
-            var provider = (TextCommandProvider)Container.Resolve<ICommandProvider>("text_commands");
-            provider.Rebuild();
+            Rocket.Core.Logging.Logger.Log("Loaded.");
         }
-
-        private void PrintMessage()
+        protected override void Unload()
         {
-            var userManager = Container.Resolve<IUserManager>();
-            if (_lastindex > (ConfigurationInstance.Messages.Length - 1))
+            Rocket.Core.Logging.Logger.Log("Unloading.");
+            StopAllCoroutines();
+            foreach (var command in Configuration.Instance.TextCommands)
+            {
+                R.Commands.DeregisterFromAssembly(this.Assembly);
+            }
+            Rocket.Core.Logging.Logger.Log("Unloaded.");
+        }
+        private IEnumerator PrintMessage()
+        {
+            yield return new WaitForSeconds(Configuration.Instance.Interval);
+            if (_lastindex > (Configuration.Instance.Messages.Length - 1))
                 _lastindex = 0;
 
-            Message message = ConfigurationInstance.Messages[_lastindex];
-            userManager.Broadcast(null, message.Text, GetColorFromName(message.Color, Color.Green));
+            Message message = Configuration.Instance.Messages[_lastindex];
+            UnturnedChat.Say(message.Text, message.UseColor);
             _lastindex++;
         }
 
-        private Color GetColorFromName(string colorString, Color defaultColor)
+        public static Color GetColorFromName(string colorString, Color defaultColor)
         {
             var color = defaultColor;
             try
             {
-                color = Color.FromName(colorString);
+                color = UnturnedChat.GetColorFromName(colorString, defaultColor);
                 if (color != default(Color))
                     return color;
 
-                int argb = Int32.Parse(colorString.Replace("#", ""), NumberStyles.HexNumber);
-                color = Color.FromArgb(argb);
+//                int argb = Int32.Parse(colorString.Replace("#", ""), NumberStyles.HexNumber);
+                color = (Color)UnturnedChat.GetColorFromHex(colorString);
             }
             catch { }
 
