@@ -50,7 +50,7 @@ namespace fr34kyn01535.MessageAnnouncer
                 _lastindex = 0;
 
             Message message = Configuration.Instance.Messages[_lastindex];
-            UnturnedChat.Say(message.Text, message.UseColor, true);
+            SDG.Unturned.ChatManager.serverSendMessage(message.Text, message.UseColor, null, null, SDG.Unturned.EChatMode.GLOBAL, message.Icon, true);
             _lastindex++;
             StartCoroutine(nameof(PrintMessage));
         }
