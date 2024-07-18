@@ -14,7 +14,6 @@ namespace fr34kyn01535.MessageAnnouncer
 {
     public class MessageAnnouncerPlugin : Rocket.Core.Plugins.RocketPlugin<MessageAnnouncerConfiguration>
     {
-        private readonly IEnumerator _scheduler;
         private int _lastindex;
 
         protected override void Load()
@@ -53,6 +52,7 @@ namespace fr34kyn01535.MessageAnnouncer
             Message message = Configuration.Instance.Messages[_lastindex];
             UnturnedChat.Say(message.Text, message.UseColor);
             _lastindex++;
+            StartCoroutine(nameof(PrintMessage));
         }
 
         public static Color GetColorFromName(string colorString, Color defaultColor)
