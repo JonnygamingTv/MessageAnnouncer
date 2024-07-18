@@ -4,7 +4,7 @@
     {
         public string Text { get; set; }
         public string Color { get; set; }
-        public UnityEngine.Color UseColor { get; private set; }
+        public UnityEngine.Color UseColor { get; set; }
 
         public Message(string text, string color)
         {
